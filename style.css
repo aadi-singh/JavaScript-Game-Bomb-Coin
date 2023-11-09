@@ -1,0 +1,16 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+body{
+    
+    background-color: rgb(105, 185, 136);
+}
+#root{
+    height:100 vh;
+    width:100 vw;
+}
+
+#score{
+    margin: 50px;
+}

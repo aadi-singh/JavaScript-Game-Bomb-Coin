@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+    <div id="root">
+        <h1 id="score">
+            Score : 0 </h1>
+    </div>
+
+    <script>
+        let score = 0;
+        const root = document.getElementById("root");
+
+
+        setInterval(addCoin, 100);
+        setInterval(addBomb, 100);
+
+
+        function addCoin() {
+            const coin = document.createElement("img");
+            coin.src = "https://i.gifer.com/origin/8a/8ab711c13e53e452209ca06551d36b3c_w200.gif";
+            coin.style.height = "100px"
+            coin.style.width = "100px"
+            coin.style.position = "absolute"
+            coin.style.top = Math.random() * 100 + "vh"
+            coin.style.left = Math.random() * 100 + "vw"
+            
+           
+            root.appendChild(coin);
+
+
+            const timeout = setTimeout(() => {
+                root.removeChild(coin);
+            }, 2000);
+
+            coin.addEventListener("mouseover", () => {
+                const coinAudio = new Audio("coin.mp3");
+                score = score + 10;
+                coinAudio.play();
+                document.getElementById("score").textContent = "Score : " + score;
+                root.removeChild(coin);
+                clearTimeout(timeout);
+            })
+
+
+        }
+
+        function addBomb() {
+            const bomb = document.createElement("img");
+            bomb.src = "https://cdn.pixabay.com/animation/2023/04/17/10/21/10-21-08-304_512.gif";
+            bomb.style.height = "100px"
+            bomb.style.width = "100px"
+            bomb.style.position = "absolute"
+            bomb.style.top = Math.random() * 100 + "vh"
+            bomb.style.left = Math.random() * 100 + "vw"
+            root.appendChild(bomb);
+
+
+            const timeout = setTimeout(() => {
+                root.removeChild(bomb);
+            }, 5000);
+
+            bomb.addEventListener("mouseover", () => {
+                score = score - 10;
+                const bombAudio = new Audio("bomb.mp3");
+                document.getElementById("score").textContent = "Score : " + score;
+                root.removeChild(bomb);
+                bombAudio.play();
+                clearTimeout(timeout);
+            })
+
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
